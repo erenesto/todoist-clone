@@ -4,6 +4,7 @@ import Checkbox from './Checkbox'
 import { comparedTasks } from '../constants'
 import { getTitle, getComparedTitle, comparedTasksExist } from '../helpers'
 import { SelectedProjectContext, ProjectsContext } from '../context'
+import AddTask from './AddTask'
 
 const Tasks = () => {
   const { selectedProject } = useContext(SelectedProjectContext)
@@ -14,19 +15,15 @@ const Tasks = () => {
 
   if (projects && selectedProject && !comparedTasksExist(selectedProject)) {
     projectName = getTitle(projects, selectedProject).name
-    console.log('proj name 1: ', projectName)
   }
 
   if (comparedTasksExist(selectedProject) && selectedProject) {
     projectName = getComparedTitle(comparedTasks, selectedProject).name
-    console.log('proj name 2: ', projectName)
   }
 
   useEffect(() => {
     document.title = `${projectName} | todoist clone app`
   })
-
-  console.log(tasks)
 
   return (
     <div className="tasks" data-testid="tasks">
@@ -39,6 +36,7 @@ const Tasks = () => {
           </li>
         ))}
       </ul>
+      <AddTask />
     </div>
   )
 }

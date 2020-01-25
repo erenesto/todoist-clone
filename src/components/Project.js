@@ -20,8 +20,6 @@ const Project = ({ proj }) => {
       })
   }
 
-  console.log(proj)
-
   return (
     <>
       <span className="sidebar__square">▪︎</span>
