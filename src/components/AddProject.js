@@ -32,40 +32,30 @@ const AddProject = ({ showing = false }) => {
   }
 
   return (
-    <div className="add-project" data-testid="add-project">
+    <div className="add-project">
       {show && (
         <div className="add-project__input">
           <input
             type="text"
             className="add-project__name"
-            data-testid="project-name"
             placeholder="Project Name"
             value={projectName}
             onChange={e => setProjectName(e.target.value)}
           />
           <button
             className="add-project__btn"
-            data-testid="project-btn"
             type="button"
             onClick={() => addProject()}
           >
             Add Project
           </button>
-          <span
-            className="add-project__cancel"
-            data-testid="hide-project-overlay"
-            onClick={() => setShow(false)}
-          >
+          <span className="add-project__cancel" onClick={() => setShow(false)}>
             Cancel
           </span>
         </div>
       )}
       <span className="add-project__icon">+</span>
-      <span
-        className="add-project__text"
-        data-testid="add-project-action"
-        onClick={() => setShow(!show)}
-      >
+      <span className="add-project__text" onClick={() => setShow(!show)}>
         Add Project
       </span>
     </div>

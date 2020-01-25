@@ -18,17 +18,16 @@ const Sidebar = () => {
   const [showProjects, setShowProjects] = useState(true)
 
   return (
-    <div className="sidebar" data-testid="sidebar">
+    <div className="sidebar">
       <ul className="sidebar__list">
         <li
           className={active === 'inbox' ? 'active' : ''}
-          data-testid="inbox"
           onClick={() => {
             setActive('inbox')
             setSelectedProject('INBOX')
           }}
         >
-          <div data-testid="inbox-action">
+          <div>
             <span>
               <AiOutlineInbox />
             </span>
@@ -37,13 +36,12 @@ const Sidebar = () => {
         </li>
         <li
           className={active === 'today' ? 'active' : ''}
-          data-testid="today"
           onClick={() => {
             setActive('today')
             setSelectedProject('TODAY')
           }}
         >
-          <div data-testid="today-action">
+          <div>
             <span>
               <AiOutlineCalendar />
             </span>
@@ -52,13 +50,12 @@ const Sidebar = () => {
         </li>
         <li
           className={active === 'nextseven' ? 'active' : ''}
-          data-testid="nextseven"
           onClick={() => {
             setActive('nextseven')
             setSelectedProject('NEXT_SEVEN_DAYS')
           }}
         >
-          <div data-testid="nextseven-action">
+          <div>
             <span>
               <AiOutlineHistory />
             </span>

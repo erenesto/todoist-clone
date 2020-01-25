@@ -2,7 +2,7 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <header className="header" data-testid="header">
+    <header className="header">
       <nav className="nav">
         <div className="logo">
           <span role="img" aria-label="logo">
@@ -12,10 +12,10 @@ const Header = () => {
         </div>
         <div className="nav__right">
           <ul>
-            <li className="nav__add" data-testid="header-add-task-action">
+            <li className="nav__add">
               <span>﹢</span>
             </li>
-            <li className="mode" data-testid="mode-action">
+            <li className="mode">
               <span role="img" aria-labelledby="moon">
                 🌒
               </span>

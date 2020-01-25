@@ -15,11 +15,7 @@ const Checkbox = ({ id }) => {
   }
 
   return (
-    <div
-      className="checkbox-wrapper"
-      data-testid="checkbox-action"
-      onClick={() => archiveTask()}
-    >
+    <div className="checkbox-wrapper" onClick={() => archiveTask()}>
       <span className="checkbox" />
     </div>
   )

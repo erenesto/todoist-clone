@@ -21,7 +21,6 @@ const Projects = ({ activeVal = null }) => {
         <li
           key={docId}
           data-doc-id={docId}
-          data-testid="project-action"
           className={
             active === projectId
               ? 'active sidebar__project'

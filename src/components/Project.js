@@ -26,7 +26,6 @@ const Project = ({ proj }) => {
       <span className="sidebar__project-name">{proj.name}</span>
       <span
         className="sidebar__project-delete"
-        data-testid="delete-project"
         role="button"
         tabIndex={0}
         onClick={() => setConfirmDelete(!confirmDelete)}
