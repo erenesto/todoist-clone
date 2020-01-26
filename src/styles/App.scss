@@ -7,6 +7,13 @@
   --box-shadow: hsla(0, 0%, 0%, 0.1) 0px 0px 0px 1px,
     hsla(0, 0%, 0%, 0.1) 0px 3px 9px;
   --border: 1px solid hsl(0, 0%, 93%);
+  --dark-bg: hsl(227, 17%, 16%);
+  --dark-tasks-bg: hsl(224, 16%, 18%);
+  --dark-font-color: hsl(0, 0%, 100%);
+  --dark-font-color-secondary: hsl(0, 0%, 60%);
+  --dark-border: 1px solid hsl(227, 19%, 14%);
+  --dark-hover: hsl(224, 16%, 18%);
+  --dark-input: hsl(224, 16%, 25%);
 }
 
 * {
@@ -173,16 +180,15 @@ body {
 
         &.nav__add {
           margin-right: 1.4rem;
-
-          // button {
-          //   background-color: transparent;
-          //   color: white;
-          //   cursor: pointer;
-          // }
+        }
+        button {
+          background-color: transparent;
+          border: 0;
+          cursor: pointer;
+          font-size: 2.3rem;
         }
         span {
           display: inline-block;
-          font-size: 2.3rem;
         }
       }
     }
@@ -218,7 +224,7 @@ body {
   }
 
   .add-task {
-    margin-top: 20px;
+    margin-top: 2rem;
   }
 
   &__list li {
@@ -308,26 +314,27 @@ body {
 
       &.active,
       &:hover {
-        font-weight: bold;
+        font-weight: 700;
         background-color: hsl(0, 0%, 98%);
       }
     }
   }
 
   &__mid {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: -webkit-box;
-    display: -ms-flexbox;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 1rem 0;
     display: flex;
+    align-items: center;
     border-bottom: 1px solid hsl(0, 0%, 93%);
+    border-top: 1px solid hsl(0, 0%, 93%);
     padding-left: 10px;
     cursor: pointer;
 
     span {
       color: hsla(0, 0%, 0%, 0.5);
       margin-right: 10px;
-      line-height: 2;
+      line-height: 1;
 
       svg.hidden-projects {
         transform: rotate(-90deg);
@@ -337,9 +344,8 @@ body {
     h2 {
       margin: 0;
       color: hsl(0, 0%, 20%);
-      font-size: 15px;
-      font-weight: bold;
-      padding-bottom: 20px;
+      font-size: 1.6rem;
+      font-weight: 600;
     }
   }
 
@@ -362,6 +368,7 @@ body {
     @include df('left');
     cursor: pointer;
     position: relative;
+    padding-left: 1rem;
 
     & > div:nth-child(1) {
       padding: 5px 0;
@@ -375,6 +382,10 @@ body {
     &-name {
       font-size: 1.6rem;
       padding: 10px 0 10px 10px;
+      &.active,
+      &:hover {
+        font-weight: 600;
+      }
     }
 
     &-delete {
@@ -389,7 +400,6 @@ body {
 
     &.active,
     &:hover {
-      font-weight: 600;
       background-color: hsl(0, 0%, 98%);
     }
 
@@ -449,11 +459,11 @@ body {
 
 .add-project {
   padding-left: 13px;
-  padding-right: 20px;
-  margin-top: 20px;
+  padding-right: 2rem;
+  margin-top: 2rem;
 
   &__input {
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
   }
 
   &__name {
@@ -462,9 +472,13 @@ body {
     background-color: hsl(0, 0%, 98%);
     border-radius: 3px;
     height: 35px;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 5px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  &__text {
+    margin-bottom: 1rem;
   }
 
   &__btn {
@@ -473,6 +487,36 @@ body {
 
   &__cancel {
     @include abort();
+  }
+}
+
+.task-date {
+  @include box();
+  background-color: #fff;
+  width: 200px;
+  right: 0;
+
+  &__list li {
+    @include task-item();
+    padding: 0;
+
+    div:nth-child(1) {
+      padding: 10px;
+      width: 100%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+
+      align-items: center;
+
+      span:first-of-type {
+        margin-right: 10px;
+
+        svg {
+          fill: grey;
+        }
+      }
+    }
   }
 }
 
@@ -486,7 +530,6 @@ body {
     width: 100%;
     height: 100%;
     z-index: 2000;
-    -webkit-transition: opacity 0.2s ease-in;
     transition: opacity 0.2s ease-in;
     height: calc(100vh);
 
@@ -496,8 +539,6 @@ body {
       }
 
       overflow: visible;
-      margin-bottom: 20px;
-      margin-top: 5.5rem;
       border-radius: 5px;
       background-color: white;
       position: absolute;
@@ -506,26 +547,27 @@ body {
       padding: 2rem 3rem;
       -webkit-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
-
-      .header {
-        font-size: 13px;
-        margin-bottom: 2rem;
-        float: left;
-      }
-    }
-
-    .add-task__cancel-x {
-      cursor: pointer;
-      color: gray;
-      float: right;
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin-top: 10px;
     }
   }
-
   &__main {
     position: relative;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+  }
+  &__title {
+    font-size: 13px;
+  }
+
+  &__cancel-btn {
+    cursor: pointer;
+    color: gray;
+    float: right;
+    font-weight: bold;
+    font-size: 1.2rem;
   }
 
   &__project,
@@ -533,7 +575,7 @@ body {
     cursor: pointer;
     float: right;
     color: gray;
-    margin: 2rem 1rem;
+    margin: 1rem 1rem;
   }
 
   &__project {
@@ -543,16 +585,16 @@ body {
   &__content {
     width: 100%;
     border: 1px solid hsl(0, 0%, 93%);
-    background-color: white !important;
+    background-color: #fff;
     border-radius: 3px;
     height: 3.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    margin-bottom: 5px;
+    margin-bottom: 1rem;
   }
 
   &__cancel,
-  &__submit {
+  &__icon {
     @include not-select;
   }
 
@@ -580,6 +622,7 @@ body {
 .add-project__icon {
   color: var(--primary-color);
   font-size: 18px;
+  margin-left: 0.5rem;
 }
 
 .add-task__text,
@@ -587,7 +630,6 @@ body {
   display: inline-block;
   color: hsl(0, 0%, 33%);
   font-size: 1.4rem;
-  margin-left: 1.5rem;
 }
 
 .project-overlay {
@@ -606,6 +648,86 @@ body {
     div:nth-child(1) {
       width: 100%;
       padding: 1rem;
+    }
+  }
+}
+
+.App.dark {
+  background-color: var(--dark-bg);
+  color: var(--dark-font-color);
+  h2 {
+    color: var(--dark-font-color-secondary);
+  }
+  .header {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+  }
+  .nav {
+    &__add {
+      button {
+        color: var(--primary-color);
+      }
+    }
+  }
+  .tasks {
+    background-color: var(--dark-tasks-bg);
+    border-left: var(--dark-border);
+    &__list {
+      li {
+        color: var(--dark-font-color);
+        border-bottom: var(--dark-border);
+      }
+    }
+  }
+  .sidebar {
+    background-color: var(--dark-bg);
+    color: var(--dark-font-color);
+    border-left: var(--dark-border);
+    &__list {
+      li {
+        color: var(--dark-font-color);
+        &.active,
+        &:hover {
+          background-color: var(--dark-hover);
+        }
+      }
+    }
+    &__project {
+      &.active,
+      &:hover {
+        background-color: var(--dark-hover);
+      }
+    }
+    &__mid {
+      border-top: var(--dark-border);
+      border-bottom: var(--dark-border);
+      span {
+        color: var(--dark-font-color-secondary);
+      }
+    }
+  }
+
+  .add {
+    &-project__text,
+    &-task__text {
+      color: var(--dark-font-color-secondary);
+    }
+  }
+
+  .add-task {
+    &__content {
+      background-color: var(--dark-input);
+      border: var(--dark-border);
+    }
+    &__main {
+      background-color: var(--dark-tasks-bg);
+    }
+  }
+
+  .add-project {
+    &__name {
+      background-color: var(--dark-input);
+      border: var(--dark-border);
     }
   }
 }

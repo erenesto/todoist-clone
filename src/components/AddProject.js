@@ -33,6 +33,10 @@ const AddProject = ({ showing = false }) => {
 
   return (
     <div className="add-project">
+      <span className="add-project__text" onClick={() => setShow(!show)}>
+        Add Project
+      </span>
+      <span className="add-project__icon">+</span>
       {show && (
         <div className="add-project__input">
           <input
@@ -54,10 +58,6 @@ const AddProject = ({ showing = false }) => {
           </span>
         </div>
       )}
-      <span className="add-project__icon">+</span>
-      <span className="add-project__text" onClick={() => setShow(!show)}>
-        Add Project
-      </span>
     </div>
   )
 }

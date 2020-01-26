@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import { ThemeContext } from '../context'
+import AddTask from '../components/AddTask'
 
-const Header = () => {
+const Header = ({ toggleTheme }) => {
+  const theme = useContext(ThemeContext)
+
+  const [showMain, setShowMain] = useState(false)
+  const [showQuickAdd, setShowQuickAdd] = useState(false)
+
   return (
     <header className="header">
       <nav className="nav">
@@ -13,17 +20,56 @@ const Header = () => {
         <div className="nav__right">
           <ul>
             <li className="nav__add">
-              <span>﹢</span>
+              <button
+                onClick={() => {
+                  setShowQuickAdd(true)
+                  setShowMain(true)
+                }}
+                onKeyDown={() => {
+                  setShowQuickAdd(true)
+                  setShowMain(true)
+                }}
+                aria-label="Task quick add"
+                type="button"
+              >
+                ﹢
+              </button>
             </li>
-            <li className="mode">
-              <span role="img" aria-labelledby="moon">
-                🌒
-              </span>
-              {/* <span>🌞</span> */}
+            <li className="nav__mode">
+              {theme === 'light' ? (
+                <button
+                  onClick={toggleTheme}
+                  onKeyDown={toggleTheme}
+                  aria-label="Dark mode on"
+                  type="button"
+                >
+                  <span role="img" aria-labelledby="dark">
+                    🌒
+                  </span>
+                </button>
+              ) : (
+                <button
+                  onClick={toggleTheme}
+                  onKeyDown={toggleTheme}
+                  aria-label="Dark mode off"
+                  type="button"
+                >
+                  <span role="img" aria-labelledby="light">
+                    🌞
+                  </span>
+                </button>
+              )}
             </li>
           </ul>
         </div>
       </nav>
+
+      <AddTask
+        showAddTask={false}
+        showQuickAdd={showQuickAdd}
+        setShowQuickAdd={setShowQuickAdd}
+        showMain={showMain}
+      />
     </header>
   )
 }

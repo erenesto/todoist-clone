@@ -5,6 +5,8 @@ import moment from 'moment'
 import { AiOutlineUnorderedList, AiFillCalendar } from 'react-icons/ai'
 import { firebase } from '../firebaseConfig'
 import { SelectedProjectContext } from '../context'
+import TaskDate from './TaskDate'
+import Overlay from './Overlay'
 
 const AddTask = ({
   showAddTask = true,
@@ -59,8 +61,8 @@ const AddTask = ({
     <div className={showQuickAdd ? 'add-task add-task__overlay' : 'add-task'}>
       {showAddTask && (
         <div className="add-task__slight" onClick={() => setShow(!show)}>
-          <div className="add-task__icon">+</div>
           <div className="add-task__text">Add Task</div>
+          <div className="add-task__icon">+</div>
         </div>
       )}
 
@@ -68,10 +70,10 @@ const AddTask = ({
         <div className="add-task__main">
           {showQuickAdd && (
             <>
-              <div>
-                <h2 className="header">Add Task Quick</h2>
+              <div className="add-task__header">
+                <h2 className="add-task__title">Add Task Quick</h2>
                 <span
-                  className="add-task__cancel-x"
+                  className="add-task__cancel-btn"
                   aria-label="Cancel adding task"
                   onClick={() => {
                     setShow(false)
@@ -91,7 +93,16 @@ const AddTask = ({
               </div>
             </>
           )}
-
+          <Overlay
+            setProject={setProject}
+            showOverlay={showOverlay}
+            setShowOverlay={setShowOverlay}
+          />
+          <TaskDate
+            setTaskDate={setTaskDate}
+            showDate={showDate}
+            setShowDate={setShowDate}
+          />
           <input
             className="add-task__content"
             aria-label="Enter a task"
