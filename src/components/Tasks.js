@@ -13,12 +13,16 @@ const Tasks = () => {
 
   let projectName = ''
 
-  if (projects && selectedProject && !comparedTasksExist(selectedProject)) {
-    projectName = getTitle(projects, selectedProject).name
-  }
-
   if (comparedTasksExist(selectedProject) && selectedProject) {
     projectName = getComparedTitle(comparedTasks, selectedProject).name
+  }
+  if (
+    projects &&
+    projects.length > 0 &&
+    selectedProject &&
+    !comparedTasksExist(selectedProject)
+  ) {
+    projectName = getTitle(projects, selectedProject).name
   }
 
   useEffect(() => {

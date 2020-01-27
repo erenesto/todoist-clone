@@ -129,7 +129,7 @@ body {
   width: 100%;
   position: fixed;
 
-  @include mq('900px') {
+  @include mq('860px') {
     padding: 0 10px;
   }
 
@@ -213,7 +213,7 @@ body {
   max-width: 68rem;
   background: hsl(0, 0%, 98%);
 
-  @include mq('900px') {
+  @include mq('860px') {
     margin-right: 0;
   }
 
@@ -490,33 +490,57 @@ body {
   }
 }
 
-.task-date {
+.dropdown {
   @include box();
   background-color: #fff;
-  width: 200px;
+  overflow: hidden;
+  top: 3.4rem;
   right: 0;
+  width: 20rem;
+  overflow: hidden;
+
+  @include mq('860px') {
+    width: 20rem;
+    right: 0;
+  }
+
+  &__wrapper {
+    position: relative;
+    display: inline-block;
+  }
 
   &__list li {
     @include task-item();
     padding: 0;
 
-    div:nth-child(1) {
-      padding: 10px;
+    &:last-child {
+      border-bottom: 0;
+    }
+
+    & > div {
       width: 100%;
-      display: -webkit-box;
-      display: -ms-flexbox;
+      padding: 1rem;
       display: flex;
-
       align-items: center;
+      position: relative;
 
-      span:first-of-type {
-        margin-right: 10px;
+      &.active::after {
+        content: '✔';
+        position: absolute;
+        right: 1rem;
+      }
 
-        svg {
-          fill: grey;
-        }
+      span {
+        display: inline-flex;
+        padding: 0 5px;
       }
     }
+  }
+  &__btn {
+    cursor: pointer;
+    float: right;
+    color: gray;
+    margin: 1rem 1rem;
   }
 }
 
@@ -534,7 +558,7 @@ body {
     height: calc(100vh);
 
     .add-task__main {
-      @include mq('900px') {
+      @include mq('860px') {
         width: 90%;
       }
 
@@ -543,10 +567,10 @@ body {
       background-color: white;
       position: absolute;
       left: 50%;
-      top: 50%;
+      top: 20%;
       padding: 2rem 3rem;
-      -webkit-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%);
+      min-width: 40%;
     }
   }
   &__main {
@@ -568,14 +592,6 @@ body {
     float: right;
     font-weight: bold;
     font-size: 1.2rem;
-  }
-
-  &__project,
-  &__date {
-    cursor: pointer;
-    float: right;
-    color: gray;
-    margin: 1rem 1rem;
   }
 
   &__project {
@@ -605,6 +621,14 @@ body {
   &__btn {
     @include btn('90px');
   }
+
+  &__settings {
+    display: flex;
+  }
+
+  &__btns {
+    flex: 1;
+  }
 }
 
 .add-task__slight {
@@ -630,26 +654,6 @@ body {
   display: inline-block;
   color: hsl(0, 0%, 33%);
   font-size: 1.4rem;
-}
-
-.project-overlay {
-  @include box();
-  background-color: white;
-
-  @include mq('900px') {
-    width: 20rem;
-    right: 0;
-  }
-
-  &__list li {
-    @include task-item();
-    padding: 0;
-
-    div:nth-child(1) {
-      width: 100%;
-      padding: 1rem;
-    }
-  }
 }
 
 .App.dark {
@@ -718,6 +722,7 @@ body {
     &__content {
       background-color: var(--dark-input);
       border: var(--dark-border);
+      color: var(--dark-font-color);
     }
     &__main {
       background-color: var(--dark-tasks-bg);
@@ -728,6 +733,17 @@ body {
     &__name {
       background-color: var(--dark-input);
       border: var(--dark-border);
+      color: var(--dark-font-color);
+    }
+  }
+
+  .dropdown {
+    &__list {
+      li {
+        background: var(--dark-bg);
+        border: var(--dark-border);
+        color: var(--dark-font-color);
+      }
     }
   }
 }

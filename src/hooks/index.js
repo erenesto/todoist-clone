@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import moment from 'moment'
 import { firebase } from '../firebaseConfig'
 import { comparedTasksExist } from '../helpers'
@@ -9,10 +9,7 @@ export const useTasks = selectedProject => {
   const [archivedTasks, setArchivedTasks] = useState([])
 
   useEffect(() => {
-    let unsubscribe = firebase
-      .firestore()
-      .collection('tasks')
-      .where('userId', '==', '23a4b8ab411a')
+    let unsubscribe = firebase.firestore().collection('tasks')
 
     unsubscribe =
       selectedProject && !comparedTasksExist(selectedProject)
@@ -57,7 +54,6 @@ export const useProjects = () => {
     firebase
       .firestore()
       .collection('projects')
-      .where('userId', '==', '23a4b8ab411a')
       .orderBy('projectId')
       .get()
       .then(snapshot => {
@@ -73,4 +69,28 @@ export const useProjects = () => {
   }, [projects])
 
   return { projects, setProjects }
+}
+
+export const useCloseDropdown = () => {
+  const [showDropdown, setShowDropdown] = useState(false)
+  const dropdownWrapperRef = useRef()
+  console.log(dropdownWrapperRef)
+
+  const handleClickOutside = e => {
+    if (dropdownWrapperRef && !dropdownWrapperRef.current.contains(e.target)) {
+      setShowDropdown(false)
+    }
+  }
+
+  useEffect(() => {
+    if (dropdownWrapperRef) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
+  return [dropdownWrapperRef, showDropdown, setShowDropdown]
 }

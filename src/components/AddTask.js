@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useContext } from 'react'
 import moment from 'moment'
-import { AiOutlineUnorderedList, AiFillCalendar } from 'react-icons/ai'
 import { firebase } from '../firebaseConfig'
 import { SelectedProjectContext } from '../context'
 import TaskDate from './TaskDate'
@@ -18,8 +17,6 @@ const AddTask = ({
   const [taskDate, setTaskDate] = useState('')
   const [project, setProject] = useState('')
   const [show, setShow] = useState(showMain)
-  const [showOverlay, setShowOverlay] = useState(false)
-  const [showDate, setShowDate] = useState(false)
 
   const { selectedProject } = useContext(SelectedProjectContext)
 
@@ -42,7 +39,6 @@ const AddTask = ({
         .firestore()
         .collection('tasks')
         .add({
-          userId: '23a4b8ab411a',
           archived: false,
           projectId,
           task,
@@ -52,7 +48,6 @@ const AddTask = ({
           setTask('')
           setProject('')
           setShow('')
-          setShowOverlay(false)
         })
     )
   }
@@ -77,12 +72,12 @@ const AddTask = ({
                   aria-label="Cancel adding task"
                   onClick={() => {
                     setShow(false)
-                    setShowOverlay(false)
+
                     setShowQuickAdd(false)
                   }}
                   onKeyDown={() => {
                     setShow(false)
-                    setShowOverlay(false)
+
                     setShowQuickAdd(false)
                   }}
                   tabIndex={0}
@@ -93,16 +88,7 @@ const AddTask = ({
               </div>
             </>
           )}
-          <Overlay
-            setProject={setProject}
-            showOverlay={showOverlay}
-            setShowOverlay={setShowOverlay}
-          />
-          <TaskDate
-            setTaskDate={setTaskDate}
-            showDate={showDate}
-            setShowDate={setShowDate}
-          />
+
           <input
             className="add-task__content"
             aria-label="Enter a task"
@@ -111,51 +97,41 @@ const AddTask = ({
             value={task}
             onChange={e => setTask(e.target.value)}
           />
-          <button
-            type="button"
-            className="add-task__btn"
-            onClick={() =>
-              showQuickAdd ? addTask() && setShowQuickAdd(false) : addTask()
-            }
-          >
-            Add Task
-          </button>
-          {!showQuickAdd && (
-            <span
-              className="add-task__cancel"
-              onClick={() => {
-                setShow(false)
-                setShowOverlay(false)
-              }}
-              onKeyDown={() => {
-                setShow(false)
-                setShowOverlay(false)
-              }}
-              aria-label="Cancel adding a task"
-              tabIndex={0}
-              role="button"
-            >
-              Cancel
-            </span>
-          )}
-          <span
-            className="add-task__project"
-            onClick={() => setShowOverlay(!showOverlay)}
-            onKeyDown={() => setShowOverlay(!showOverlay)}
-            tabIndex={0}
-            role="button"
-          >
-            <AiOutlineUnorderedList />
-          </span>
-          <span
-            className="add-task__date"
-            onClick={() => setShowDate(!showDate)}
-            onKeyDown={() => setShowDate(!showDate)}
-            tabIndex={0}
-            role="button"
-          >
-            <AiFillCalendar />
-          </span>
+
+          <div className="add-task__settings">
+            <div className="add-task__btns">
+              <button
+                type="button"
+                className="add-task__btn"
+                onClick={() =>
+                  showQuickAdd ? addTask() && setShowQuickAdd(false) : addTask()
+                }
+              >
+                Add Task
+              </button>
+              {!showQuickAdd && (
+                <span
+                  className="add-task__cancel"
+                  onClick={() => {
+                    setShow(false)
+                  }}
+                  onKeyDown={() => {
+                    setShow(false)
+                  }}
+                  aria-label="Cancel adding a task"
+                  tabIndex={0}
+                  role="button"
+                >
+                  Cancel
+                </span>
+              )}
+            </div>
+
+            <div className="add-task__icons">
+              <Overlay setProject={setProject} />
+              <TaskDate setTaskDate={setTaskDate} />
+            </div>
+          </div>
         </div>
       )}
     </div>
