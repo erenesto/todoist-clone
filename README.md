@@ -1,14 +1,6 @@
 # Todoist Clone App
 
-This is a [Todoist App](https://todoist.com/) Clone (not completely) React application . This project was prepared to practice about **React Hooks**.
-
-#### What i used
-
-- React Hooks
-- Context API
-- Eslint - Airbnb
-- Prettier
-- Sass
+This is a [Todoist App](https://todoist.com/) Clone (not completely) React application . I just prepared this to practice for React Hooks.
 
 #### Installation
 
