@@ -15,10 +15,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ---
 
-##### Dark
+##### Light
 
 ![Design Light](todoist-clone-light.png)
 
-##### Light
+##### Dark
 
 ![Design Dark](todoist-clone-dark.png)
