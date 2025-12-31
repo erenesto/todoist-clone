@@ -8,12 +8,12 @@
     "@testing-library/user-event": "^7.1.2",
     "firebase": "^6.6.2",
     "moment": "^2.24.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^9.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-icons": "^3.8.0",
-    "react-scripts": "3.3.0",
+    "react-scripts": "5.0.1",
     "shortid": "^2.2.15"
   },
   "scripts": {
